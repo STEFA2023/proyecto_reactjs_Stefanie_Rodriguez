@@ -1,7 +1,7 @@
 import "./App.css"
-import { Navbar } from "./components/layout/Navbar"
-import { Footer } from "./components/layout/Footer"
-import {ItemListContainer} from "./components/pages/ItemListContainer"
+import { Navbar } from "./components/layout/navbar/Navbar"
+import { Footer } from "./components/layout/footer/Footer"
+import {ItemListContainer} from "./components/pages/itemListContainer/ItemListContainer"
 
 
 function App() {

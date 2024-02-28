@@ -1,5 +1,5 @@
-import { Greeting } from "../common/Greeting"
-import { ProductCard } from "../common/ProductCard"
+import { Greeting } from "../../common/greeting/Greeting"
+import { ProductCard } from "../../common/productCard/ProductCard"
 
 export const ItemListContainer = ()=>{
     return <div>

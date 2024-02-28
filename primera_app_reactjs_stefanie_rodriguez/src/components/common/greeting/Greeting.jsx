@@ -1,4 +1,4 @@
-import styles from "../common/Greeting.module.css"
+import styles from "../../common/greeting/Greeting.module.css"
 
 export const Greeting = () => {
     return (

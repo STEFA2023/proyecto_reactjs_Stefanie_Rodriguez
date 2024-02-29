@@ -11,7 +11,7 @@ function App() {
     <div>
       <Navbar />
       <h1>Primera app ReactJs</h1>
-      <ItemListContainer Greeting= "Bienvenidos a nuestra pagina"/>
+      <ItemListContainer/>
       <Footer />
     </div>
   )

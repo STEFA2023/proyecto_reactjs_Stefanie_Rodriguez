@@ -1,4 +1,4 @@
-import CartWidget from "../../common/cartWidget/CartWidget";
+import CartWidgetContainer from "../../common/cartWidget/CartWidgetContainer";
 
 export const Navbar = ()=>{
     return <nav>
@@ -8,7 +8,7 @@ export const Navbar = ()=>{
             <li>Categorias</li>
             <li>Sucursales</li>
             <h4>Carrito</h4>
-            <CartWidget />
+            <CartWidgetContainer />
         </ul>
     </nav>
 }

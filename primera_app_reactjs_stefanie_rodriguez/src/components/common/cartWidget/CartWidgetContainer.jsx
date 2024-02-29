@@ -1,6 +1,6 @@
 import { MdShoppingCart } from "react-icons/md";
 
-export const CartWidget = () => {
+export const CartWidgetContainer = () => {
     return (
     <div>
         <span>0</span>
@@ -9,4 +9,4 @@ export const CartWidget = () => {
     );
 };
 
-export default CartWidget;
+export default CartWidgetContainer;

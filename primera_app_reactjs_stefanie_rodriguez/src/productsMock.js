@@ -1,6 +1,6 @@
-export let products = [
+export const products = [
     {
-        id: 1,
+        id:"1",
         title: "Remera",
         price:2500,
         description:"Elaborada en algodon",
@@ -9,7 +9,7 @@ export let products = [
         category: "sport"
     },
     {
-        id: 2,
+        id: "2",
         title: "Pantalón",
         price:1800,
         description:"Elaborado en gabardina",
@@ -18,7 +18,7 @@ export let products = [
         category: "sport"
     },
     {
-        id: 3,
+        id: "3",
         title: "Zapatos",
         price:3500,
         description:"Elaborados con suela ortopédica",
@@ -27,7 +27,7 @@ export let products = [
         category: "formal"
     },
     {
-        id: 4,
+        id: "4",
         title: "Camisa",
         price:2000,
         description:"Elaborada en popelina de alta calidad",
@@ -35,4 +35,27 @@ export let products = [
         stock:10,
         category: "formal"
     },
-]
+];
+
+
+
+
+export const getProduct = (id) => {
+
+    return new Promise( (resolve, reject) => {
+
+        if(products.length > 0){
+            const item = products.find(product => product.id === id);
+            setTimeout (() => {
+                if(item) {
+                    resolve(item);
+        } else{
+        reject(`No se encuentra el articulo con el id ${id}`);
+        }
+    }, 2000)
+
+}else {
+    reject ("No hay productos")
+}
+    })
+}

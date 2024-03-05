@@ -2,7 +2,8 @@ import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { ItemCountContainer } from "../itemCount/ItemCountContainer";
 
-export const ProductCard = ({Titulo, Price, Description, Image}) => {
+
+export const ProductCard = ({ id, Titulo, Price, Description, Image}) => {
     return (
     <div>
         <Card sx={{ maxWidth: 345 }}>
@@ -21,7 +22,7 @@ export const ProductCard = ({Titulo, Price, Description, Image}) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <ItemCountContainer/>
+                <ItemCountContainer productId={id} />
                 <Button variant="contained" endIcon={<AddShoppingCartIcon />}>Agregar al carrito
 </Button>
             </CardActions>

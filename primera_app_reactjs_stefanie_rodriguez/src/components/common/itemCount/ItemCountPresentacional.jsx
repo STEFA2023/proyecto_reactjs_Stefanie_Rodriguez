@@ -1,3 +1,4 @@
+import React from "react";
 
 export const ItemCountPresentacional = ({sumar, restar, counter}) => {
     return (

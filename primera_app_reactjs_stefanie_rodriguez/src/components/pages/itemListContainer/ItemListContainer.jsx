@@ -3,7 +3,7 @@ import { Greeting } from "../../common/greeting/Greeting";
 import ItemListPresentacional  from "./itemListPresentacional";
 import { products } from "../../../productsMock";
 
-const ItemListContainer = () => {
+const ItemListContainer = ({productId}) => {
 
     const [items, setItems] = useState ([])
 
@@ -24,13 +24,10 @@ const ItemListContainer = () => {
     
 
     return( 
-    /*<>
-        <Greeting />
-        <ItemListPresentacional items={items} />
-    </>*/
     <>
+    <Greeting />
     {
-        items.length > 0 ? <ItemListPresentacional items={items} /> : <h1>No hay </h1>
+        items.length > 0 ? <ItemListPresentacional items={items}/> : <h1>No hay </h1>
     }
     </>
     );

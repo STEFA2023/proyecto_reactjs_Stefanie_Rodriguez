@@ -1,6 +1,15 @@
+import { ProductCard } from "../common/productCard/ProductCard"
 
-export const ItemDetail = () => {
+export const ItemDetail = ({ id, Titulo, Price, Description, Image}) => {
     return (
-        <div>ItemDetail</div>
-    )
-}
+        <div>
+            <ProductCard
+            id= {id}
+            Titulo={Titulo}
+            Price={Price}
+            Description={Description}
+            Image={Image}
+            />
+        </div>
+    );
+};

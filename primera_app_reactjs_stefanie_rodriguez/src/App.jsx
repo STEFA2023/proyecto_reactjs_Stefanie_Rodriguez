@@ -13,6 +13,7 @@ function App() {
 
   return (
 <>
+
     <BrowserRouter>
       <Navbar/>
       <Routes>
@@ -22,9 +23,6 @@ function App() {
         <Route path="/category/:id" element={ < Category />  } />
       </Routes>
     </BrowserRouter>
-    <h1>Primera app ReactJs</h1>
-      <h4>Listado de productos:</h4>
-      <ItemListContainer/>
       <Footer />
 </>
   )

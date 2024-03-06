@@ -2,7 +2,9 @@ import { ProductCard } from "../../common/productCard/ProductCard";
 
 const ItemListPresentacional = ({items}) => {
     return (
-        <div>
+        <div>   
+            <h1>Primera app ReactJs</h1>
+            <h4>Listado de productos:</h4>
             {items.map((item) => (
                 <div key={item.id}>
                     <ProductCard 

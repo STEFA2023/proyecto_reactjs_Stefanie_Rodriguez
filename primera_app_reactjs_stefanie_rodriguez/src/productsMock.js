@@ -1,3 +1,4 @@
+
 export const products = [
     {
         id:"1",
@@ -12,8 +13,8 @@ export const products = [
         id: "2",
         title: "Pantalón",
         price:1800,
-        description:"Elaborado en gabardina",
-        img:"",
+        description:"Elaborado en algodón",
+        img:"https://res.cloudinary.com/deed7lfnh/image/upload/v1709695162/algr4_1612789898_l3gudu.jpg",
         stock:3,
         category: "sport"
     },
@@ -22,7 +23,7 @@ export const products = [
         title: "Zapatos",
         price:3500,
         description:"Elaborados con suela ortopédica",
-        img:"",
+        img:"https://res.cloudinary.com/deed7lfnh/image/upload/v1709694922/716suvSTBnL._AC_SY575__jhbjom.jpg",
         stock:7,
         category: "formal"
     },
@@ -31,7 +32,7 @@ export const products = [
         title: "Camisa",
         price:2000,
         description:"Elaborada en popelina de alta calidad",
-        img:"",
+        img:"https://res.cloudinary.com/deed7lfnh/image/upload/v1709695032/A09T7144-scaled-1-1366x2048_lujrvj.jpg",
         stock:10,
         category: "formal"
     },

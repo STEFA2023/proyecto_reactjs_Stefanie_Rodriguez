@@ -3,7 +3,7 @@ import ItemCountPresentacional from "./ItemCountPresentacional";
 import { products } from "../../../productsMock";
 
 
-export const ItemCountContainer = ({ productId }) => {
+export const ItemCountContainer = ({ productId, onAdd }) => {
     const product = products.find(item => item.id === productId);
     const [counter, setCounter] = useState(1);
 
@@ -21,7 +21,7 @@ export const ItemCountContainer = ({ productId }) => {
     };
     return (
         <div>
-            <ItemCountPresentacional sumar={sumar} restar={restar} counter={counter}/>
+            <ItemCountPresentacional sumar={sumar} restar={restar} counter={counter} onAdd={onAdd}/>
         </div>
     );
 };

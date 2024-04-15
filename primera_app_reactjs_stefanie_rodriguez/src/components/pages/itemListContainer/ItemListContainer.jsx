@@ -3,7 +3,7 @@ import { Greeting } from "../../common/greeting/Greeting";
 import ItemListPresentacional  from "./itemListPresentacional";
 import { products } from "../../../productsMock";
 
-const ItemListContainer = ({productId}) => {
+const ItemListContainer = ({}) => {
 
     const [items, setItems] = useState ([])
 

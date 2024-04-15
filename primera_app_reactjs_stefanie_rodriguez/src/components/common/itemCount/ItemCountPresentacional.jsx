@@ -5,7 +5,7 @@ export const ItemCountPresentacional = ({sumar, restar, counter}) => {
     <div>
         <button onClick={restar}>-</button>
         <h4> {counter} </h4>
-        <button onClick={sumar}>+</button>
+        <button onClick={sumar}>+</button>        
     </div>
     )
 };

@@ -1,9 +1,9 @@
 import { Navbarpresentacional } from "./Navbarpresentacional";
-export const Navbar = ()=>{
+export const Navbar = () => {
     return (
-    <>
-    <Navbarpresentacional/>
-    </>
+        <>
+            <Navbarpresentacional />
+        </>
     )
 }
 

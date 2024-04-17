@@ -1,9 +1,15 @@
 import { MdShoppingCart } from "react-icons/md";
+import { useContext } from "react";
+import { CartContext } from "../../../context/CartContext";
 
-export const CartWidgetContainer = () => {
+const CartWidgetContainer = () => {
+
+    const { cart } = useContext(CartContext)
+
+
     return (
     <div>
-        <span>0</span>
+        <span>{cart.length}</span>
         <MdShoppingCart color="purple"/>
     </div>
     );

@@ -1,10 +1,13 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { ItemCountContainer } from "../itemCount/ItemCountContainer";
 import { Link } from "react-router-dom";
 
 
-export const ProductCard = ({ id, Titulo, Price, Description, Image, onAdd}) => {
+export const ProductCard = ({ id, Titulo, Price, Description, Image}) => {
+
+    const addToCart = (productId, quantity) => {
+        onAdd(productId, quantity);
+    };
+
     return (
     <div>
         <Card sx={{ maxWidth: 400 }}>
@@ -23,9 +26,6 @@ export const ProductCard = ({ id, Titulo, Price, Description, Image, onAdd}) => 
                 </Typography>
             </CardContent>
             <CardActions>
-            <ItemCountContainer productId={id}/>
-            <Button variant="contained"  onClick={()=>onAdd(counter)} endIcon={<AddShoppingCartIcon />}>Agregar al carrito
-</Button>
 <Link to={`/item/${id}`}>
 <Button variant="contained">Detalles</Button>
 </Link>

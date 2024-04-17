@@ -1,7 +1,8 @@
-import { useEffect, useState, } from 'react';
+import { useContext, useEffect, useState, } from 'react';
 import { ItemDetailPresentacional } from './ItenDetailPresentacional';
 import { useParams } from 'react-router-dom';
 import { getProduct } from '../../../productsMock';
+import { CartContext } from '../../../context/CartContext';
 
 export const ItemDetailContainer = () => {
 
@@ -10,12 +11,15 @@ export const ItemDetailContainer = () => {
     const [item, setItem] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
+    const { addToCart } = useContext(CartContext)
+
     useEffect (() => {
       setIsLoading(true);
       getProduct(id)
         .then(resp => {
           setItem(resp);
           setIsLoading(false);
+          console.log(resp)
         })
         .catch(error => {
           console.error('Error fetching product:', error);
@@ -23,17 +27,20 @@ export const ItemDetailContainer = () => {
         });
     }, [id] );
 
-    const onAdd = ( cantidad )=>{
-      let infoProducto ={
+    const onAdd = ( cantidad ) => {
+      if (item) {
+      let infoProducto = {
         ...item,
         quantity: cantidad
-      };
-      console.log(infoProducto);
+      }
+      console.log(infoProducto)
+      addToCart(infoProducto);
+    }
     };
 
-  return (
-    <>
-    {isLoading ? <h2>Cargando productos...</h2> : (item && (<ItemDetailPresentacional productId={item.id} onAdd={onAdd}
+    return (
+      <>
+        {isLoading ? <h2>Cargando productos...</h2> : (item && (<ItemDetailPresentacional productId={item.id} onAdd={onAdd}
                         Titulo={item.title}
                         Price={item.price}
                         Description={item.description}

@@ -11,7 +11,7 @@ export const ItemDetailContainer = () => {
     const [item, setItem] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    const { addToCart } = useContext(CartContext)
+    const { addToCart } = useContext(CartContext);
 
     useEffect (() => {
       setIsLoading(true);
@@ -19,7 +19,6 @@ export const ItemDetailContainer = () => {
         .then(resp => {
           setItem(resp);
           setIsLoading(false);
-          console.log(resp)
         })
         .catch(error => {
           console.error('Error fetching product:', error);
@@ -28,14 +27,12 @@ export const ItemDetailContainer = () => {
     }, [id] );
 
     const onAdd = ( cantidad ) => {
-      if (item) {
       let infoProducto = {
         ...item,
-        quantity: cantidad
+        quantity: parseInt(cantidad)
       }
-      console.log(infoProducto)
+      console.log(infoProducto);
       addToCart(infoProducto);
-    }
     };
 
     return (

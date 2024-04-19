@@ -5,11 +5,13 @@ import { Link } from "react-router-dom";
 
 const CartWidgetContainer = () => {
 
-    const { cart } = useContext(CartContext);
+    const { getTotalItems } = useContext(CartContext);
     
+let totalItems = getTotalItems()
+
     return (
         <div>
-                <span>{cart.length}</span>
+                <span>{totalItems}</span>
                 <MdShoppingCart color="purple"/>
             
         </div>

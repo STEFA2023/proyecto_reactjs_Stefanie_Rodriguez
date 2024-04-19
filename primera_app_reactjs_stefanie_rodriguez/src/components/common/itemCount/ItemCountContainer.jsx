@@ -4,11 +4,11 @@ import { products } from "../../../productsMock";
 
 
 
-const ItemCountContainer = ({ onAdd }) => {
+const ItemCountContainer = ({ onAdd, initial=1 }) => {
 
     const product = products.find(item => item.id === item.id);
 
-    const [counter, setCounter] = useState(1);
+    const [counter, setCounter] = useState(initial);
 
     const sumar = () => {
         if (product && counter < product.stock) {
@@ -27,7 +27,7 @@ const ItemCountContainer = ({ onAdd }) => {
     };
     const addToCart = () => {
         if (product) {
-            onAdd(product.id, counter);
+            onAdd(product.id, counter.id);
         }
     };
     return(

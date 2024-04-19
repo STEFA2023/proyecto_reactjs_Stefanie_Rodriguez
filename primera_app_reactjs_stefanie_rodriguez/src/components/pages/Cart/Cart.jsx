@@ -2,11 +2,14 @@ import { Link } from "react-router-dom";
 import { Button} from "@mui/material";
 import { useContext } from "react";
 import { CartContext } from "../../../context/CartContext";
+import ItemCountContainer from "../../common/itemCount/ItemCountContainer";
 
 
 export const Cart = () => {
 
-    const {cart, clearCart, removeById} = useContext(CartContext)
+    const {cart, clearCart, removeById, getTotalPrice } = useContext(CartContext);
+
+    let totalShopping = getTotalPrice ()
 
     return (
         <div>
@@ -18,12 +21,13 @@ export const Cart = () => {
                     <h4>Cantidad: {product.quantity}</h4>
                     <h4>Precio: {product.price}</h4>
                     <Button variant="contained" onClick={() => removeById(product.id)} >Eliminar Producto</Button>
-                    </div>)
-            )}
+                    </div>
+            ))}
+            <h3>El total a pagar es: $ {totalShopping} </h3>
             <Button variant="contained" onClick = {clearCart} >Vaciar carrito</Button>            
             <Link to= "/checkout">
             <Button variant="contained">Finalizar compra</Button>
             </Link>
             </div>
-    )
+    );
 }

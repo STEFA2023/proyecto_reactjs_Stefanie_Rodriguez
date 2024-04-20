@@ -12,7 +12,7 @@ let totalItems = getTotalItems()
     return (
         <div>
                 <span>{totalItems}</span>
-                <MdShoppingCart color="purple"/>
+                <MdShoppingCart color="#FFCDEA"/>
             
         </div>
     );

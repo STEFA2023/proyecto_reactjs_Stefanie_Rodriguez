@@ -16,7 +16,7 @@ export const ItemDetailContainer = () => {
 
 
     useEffect (() => {
-      setIsLoading(true);
+      setIsLoading(true)
       getProduct(id)
         .then(resp => {
           setItem(resp);

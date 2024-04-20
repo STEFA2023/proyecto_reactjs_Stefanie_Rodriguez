@@ -3,7 +3,7 @@ import ItemCountContainer from "../../common/itemCount/ItemCountContainer";
 
 export const ItemDetailPresentacional = ({ id, Titulo, Price, Description, Image, onAdd, initial}) => {
     return (
-        <div>
+        <div style={{ marginTop: '20px' }}>
             <ProductCard
             id= {id}
             Titulo={Titulo}
@@ -13,7 +13,7 @@ export const ItemDetailPresentacional = ({ id, Titulo, Price, Description, Image
             onAdd={onAdd}
             />
             {
-                initial? <h2>Ya tiene {initial} en el carrito </h2> : <h4>No tienes unidades</h4>
+                initial? <h3>Ya tiene {initial} en el carrito </h3> : <h3>No tienes unidades</h3>
             }
             <ItemCountContainer
             onAdd={onAdd}

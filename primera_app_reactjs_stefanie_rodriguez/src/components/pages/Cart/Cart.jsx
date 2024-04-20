@@ -12,21 +12,21 @@ export const Cart = () => {
     let totalShopping = getTotalPrice ()
 
     return (
-        <div>
+        <div style={{ margin: '20px' }}>
             <h1>Carrito</h1>
             {cart.map((product) => (
                 <div key={product.id}>
                     <h3>Producto: {product.title}</h3>
                     <img src= {product.img} width="100" ></img>
                     <h4>Cantidad: {product.quantity}</h4>
-                    <h4>Precio: {product.price}</h4>
+                    <h4>Precio: $ {product.price}</h4>
                     <Button variant="contained" onClick={() => removeById(product.id)} >Eliminar Producto</Button>
                     </div>
             ))}
             <h3>El total a pagar es: $ {totalShopping} </h3>
-            <Button variant="contained" onClick = {clearCart} >Vaciar carrito</Button>            
+            <Button variant="contained" style={{ margin: '5px' }}onClick = {clearCart} >Vaciar carrito</Button>            
             <Link to= "/checkout">
-            <Button variant="contained">Finalizar compra</Button>
+            <Button variant="contained" style={{ margin: '5px' }}>Finalizar compra</Button>
             </Link>
             </div>
     );

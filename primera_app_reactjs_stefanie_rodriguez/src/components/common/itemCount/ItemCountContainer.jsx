@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ItemCountPresentacional from "./ItemCountPresentacional";
 import { products } from "../../../productsMock";
+import Swal from 'sweetalert2';
 
 
 
@@ -14,7 +15,12 @@ const ItemCountContainer = ({ onAdd, initial=1 }) => {
         if (product && counter < product.stock) {
             setCounter(counter + 1);
         } else {
-            alert("Stock máximo");
+            Swal.fire({
+                icon: "info",
+                iconColor: "#86469C",
+                title: "Stock máximo",
+                background: "#FFCDEA",
+            });
         }
     };
 
@@ -22,7 +28,12 @@ const ItemCountContainer = ({ onAdd, initial=1 }) => {
         if (counter > 1) {
             setCounter(counter -1 );
         } else {
-            alert ("el numero ingresado debe ser mayor a uno");
+            Swal.fire({
+                icon: "info",
+                iconColor: "#86469C",
+                title: "El número ingresado debe ser mayor a cero",
+                background: "#FFCDEA",
+            });
         }
     };
     const addToCart = () => {

@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import StoreIcon from '@mui/icons-material/Store';
 
-const navItems = ['Todo', 'Sport', 'Formal'];
+const navItems = ['Sport', 'Formal'];
 
 export const Navbar = () => {
     return (

@@ -1,35 +1,34 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { Greeting } from "../../common/greeting/Greeting";
-import ItemListPresentacional  from "./itemListPresentacional";
+import ItemListPresentacional from "./itemListPresentacional";
 import { products } from "../../../productsMock";
 
-const ItemListContainer = ({}) => {
+const ItemListContainer = () => {
+    const { category } = useParams();
+    const [items, setItems] = useState([]);
 
-    const [items, setItems] = useState ([])
+    useEffect(() => {
+        let filteredItems;
+        if (category && category !== "todos") {
+            // Filtrar los productos por la categoría especificada en la URL
+            filteredItems = products.filter(product => product.category === category);
+        } else {
+            // Mostrar todos los productos si la categoría no está especificada o es "todos"
+            filteredItems = products;
+        }
+        setItems(filteredItems);
+    }, [category]); // Vuelve a ejecutar el efecto cuando cambie la categoría en la URL
 
-
-    useEffect(()=> {
-        const tarea = new Promise((resolve, reject) =>  {
-            resolve(products)
-    });
-
-        tarea
-            .then((res) => {
-                setItems(res)
-            })
-            .catch((error) => {
-                console.log("Error al cargar los producto:",error);
-            });
-    }, [])
-    
-
-    return( 
-    <>
-    <Greeting />
-    {
-        items.length > 0 ? <ItemListPresentacional items={items}/> : <h1>No hay </h1>
-    }
-    </>
+    return (
+        <>
+            <Greeting />
+            {items.length > 0 ? (
+                <ItemListPresentacional items={items} />
+            ) : (
+                <h1>No hay productos en esta categoría</h1>
+            )}
+        </>
     );
 };
 

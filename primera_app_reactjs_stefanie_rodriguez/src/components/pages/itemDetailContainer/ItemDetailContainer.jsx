@@ -1,86 +1,71 @@
 import { useContext, useEffect, useState, } from 'react';
 import { ItemDetailPresentacional } from './ItenDetailPresentacional';
 import { useParams } from 'react-router-dom';
-import { getProduct } from '../../../productsMock';
 import { CartContext } from '../../../context/CartContext';
-
-
-import * as React from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
+import { doc, getDoc} from "firebase/firestore";
+import { database } from "../../../firebaseConfig";
+
 
 export const ItemDetailContainer = () => {
-  
-  const { id } = useParams();
-  const { addToCart, getTotalItemsById } = useContext(CartContext);
+    const { id } = useParams();
+    const { addToCart, getTotalItemsById } = useContext(CartContext);
+    const [item, setItem] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
-  const initial = getTotalItemsById(id)
-  console.log(initial)
-  const [item, setItem] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+    useEffect(() => {
+        const fetchProduct = async () => {
+            setIsLoading(true);
+            try {
+                const docRef = doc(database, "products", id);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    setItem(docSnap.data());
+                } else {
+                    console.error('No such document!');
+                }
+            } catch (error) {
+                console.error('Error fetching product:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
 
+        fetchProduct();
+    }, [id]);
 
-  function GradientCircularProgress() {
+    const initial = getTotalItemsById(id);
+
+    const onAdd = (product, quantity) => {
+        if (item) {
+            const infoProducto = {
+                ...product,
+                quantity: parseInt(quantity)
+            };
+            addToCart(infoProducto);
+        }
+    };
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        <React.Fragment>
-            <svg width={0} height={0}>
-                <defs>
-                    <linearGradient id="my_gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="#e01cd5" />
-                        <stop offset="100%" stopColor="#1CB5E0" />
-                    </linearGradient>
-                </defs>
-            </svg>
-            <CircularProgress style={{ width: 100, height: 100 }} sx={{ 'svg circle': { stroke: 'url(#my_gradient)' }}} />
-        </React.Fragment>
-        </div>
+        <>
+            {isLoading ? (
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                    <CircularProgress style={{ width: 100, height: 100 }} />
+                </div>
+            ) : item ? (
+                <ItemDetailPresentacional
+                    id={item.id}
+                    onAdd={onAdd}
+                    Titulo={item.title}
+                    Price={item.price}
+                    Description={item.description}
+                    Image={item.img}
+                    initial={initial}
+                />
+            ) : (
+                <h2>Producto no encontrado</h2>
+            )}
+        </>
     );
-}
-
-
-    useEffect (() => {
-      setIsLoading(true)
-      getProduct(id)
-        .then(resp => {
-          setItem(resp);
-          setIsLoading(false);
-        })
-        .catch(error => {
-          console.error('Error fetching product:', error);
-          setIsLoading(false);
-        });
-    }, [id] );
-
-    const onAdd = cantidad => {
-      if (item) {
-          const infoProducto = {
-              ...item,
-              quantity: parseInt(cantidad)
-          };
-          addToCart(infoProducto);
-      }
-  };
-
-  return (
-      <>
-          {isLoading ? (
-              //<h2>Cargando producto...</h2>
-              <GradientCircularProgress />
-          ) : item ? (
-              <ItemDetailPresentacional
-                  productId={item.id}
-                  onAdd={onAdd}
-                  Titulo={item.title}
-                  Price={item.price}
-                  Description={item.description}
-                  Image={item.img}
-                  initial = {initial}
-              />
-          ) : (
-              <h2>Producto no encontrado</h2>
-          )}
-      </>
-  );
 };
 
 export default ItemDetailContainer;

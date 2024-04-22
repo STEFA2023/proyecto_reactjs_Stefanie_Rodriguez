@@ -1,24 +1,44 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Greeting } from "../../common/greeting/Greeting";
 import ItemListPresentacional from "./itemListPresentacional";
-import { products } from "../../../productsMock";
+
+import { database } from "../../../firebaseConfig";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 const ItemListContainer = () => {
+
     const { category } = useParams();
     const [items, setItems] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        let filteredItems;
-        if (category && category !== "todos") {
-            // Filtrar los productos por la categoría especificada en la URL
-            filteredItems = products.filter(product => product.category === category);
-        } else {
-            // Mostrar todos los productos si la categoría no está especificada o es "todos"
-            filteredItems = products;
+
+        setIsLoading(true)
+        let productsCollection = collection(database, "products");
+
+        let consult = productsCollection;
+
+        if (category) {
+            let productsCollectionFilter = query(
+                productsCollection,
+                where("category", "==", category)
+            );
+            consult = productsCollectionFilter;
         }
-        setItems(filteredItems);
-    }, [category]); // Vuelve a ejecutar el efecto cuando cambie la categoría en la URL
+
+        getDocs(consult)
+            .then((res) => {
+                let arrayDataId = res.docs.map((elemento) => {
+                    return { ...elemento.data(), id: elemento.id };
+                });
+
+                //getDocs(productsCollectionFilter).then( (res ) => {
+
+                setItems(arrayDataId);
+            })
+            .finally(() => setIsLoading(false));
+    }, [category]);
 
     return (
         <>

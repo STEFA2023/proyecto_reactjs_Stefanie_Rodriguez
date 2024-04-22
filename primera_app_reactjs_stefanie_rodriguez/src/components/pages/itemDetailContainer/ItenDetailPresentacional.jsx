@@ -22,3 +22,4 @@ export const ItemDetailPresentacional = ({ id, Titulo, Price, Description, Image
         </div>
     );
 };
+

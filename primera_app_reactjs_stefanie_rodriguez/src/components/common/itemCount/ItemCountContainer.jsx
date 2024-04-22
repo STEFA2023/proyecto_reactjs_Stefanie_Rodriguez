@@ -1,15 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ItemCountPresentacional from "./ItemCountPresentacional";
-import { products } from "../../../productsMock";
+import { collection, getDocs } from "firebase/firestore";
+import { database } from "../../../firebaseConfig";
 import Swal from 'sweetalert2';
 
+const ItemCountContainer = ({ onAdd, initial = 1 }) => {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [counter, setCounter] = useState(initial);
 
-
-const ItemCountContainer = ({ onAdd, initial=1 }) => {
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(database, "products"));
+                const productsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                setProducts(productsData);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching products: ", error);
+            }
+        };
+        fetchProducts();
+    }, []);
 
     const product = products.find(item => item.id === item.id);
-
-    const [counter, setCounter] = useState(initial);
 
     const sumar = () => {
         if (product && counter < product.stock) {
@@ -26,7 +40,7 @@ const ItemCountContainer = ({ onAdd, initial=1 }) => {
 
     const restar = () => {
         if (counter > 1) {
-            setCounter(counter -1 );
+            setCounter(counter - 1);
         } else {
             Swal.fire({
                 icon: "info",
@@ -36,16 +50,22 @@ const ItemCountContainer = ({ onAdd, initial=1 }) => {
             });
         }
     };
+
     const addToCart = () => {
         if (product) {
-            onAdd(product.id, counter.id);
+            onAdd(product, counter);
         }
     };
-    return(
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+
+    return (
         <div>
-        <ItemCountPresentacional sumar={sumar} restar={restar} counter={counter} onAdd={addToCart}/>
-    </div>
-);
+            <ItemCountPresentacional sumar={sumar} restar={restar} counter={counter} onAdd={addToCart} />
+        </div>
+    );
 };
 
 export default ItemCountContainer;

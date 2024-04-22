@@ -10,7 +10,7 @@ export const Cart = () => {
 
     const { cart, clearCart, removeById, getTotalPrice } = useContext(CartContext);
 
-    let totalShopping = getTotalPrice();
+    const totalShopping = getTotalPrice();
 
     const alertaVaciarCart = () => {
 
@@ -39,8 +39,8 @@ export const Cart = () => {
     return (
         <div style={{ margin: '20px' }}>
             <h1>Carrito</h1>
-            {cart.map((product) => (
-                <div key={product.id}>
+            {cart.map((product, index) => (
+                <div key={index}>
                     <h3>Producto: {product.title}</h3>
                     <img src={product.img} width="100" ></img>
                     <h4>Cantidad: {product.quantity}</h4>
@@ -55,4 +55,4 @@ export const Cart = () => {
             </Link>
         </div>
     );
-}
+};
